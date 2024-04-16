@@ -1,11 +1,12 @@
-/* Estilos para la tabla */
+Estilos para la tabla
 .table-container {
-    width: 100%;
-    margin-bottom: 20px;
+    width: 80%; 
+    margin: 0 auto; 
   }
   
   .table {
-    width: 100%;
+    width: 100%; 
+    max-width: 600px;
     border-collapse: collapse;
   }
   
@@ -13,28 +14,68 @@
   .table td {
     padding: 8px;
     border: 1px solid #ddd;
+    text-align: left;
   }
   
   .table th {
     background-color: #f2f2f2;
     font-weight: bold;
-    text-align: left;
   }
   
   .table tr:nth-child(even) {
     background-color: #f2f2f2;
   }
   
-  /* Estilos para los botones */
+  .table tr:hover {
+    background-color: #e2e2e2;
+  }
+  
+ 
   .button {
-    padding: 8px 12px;
-    background-color: #007bff;
-    color: #fff;
+    padding: 6px 12px;
+    background-color: #6e8ed3;
+    color: white;
     border: none;
     cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px; 
+    margin: 4px 2px;
+    transition-duration: 0.4s;
   }
+
+
+  .button1 {
+    padding: 6px 12px;
+    background-color: #f14848;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px; 
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+  }
+
   
   .button:hover {
-    background-color: #0056b3;
+    background-color: #072f51; 
   }
-  
+
+
+  .button1:hover {
+    background-color: #a30b0b; 
+  }
+
+
+
+  /* Estilos para el contenedor de la tabla */
+.table-container {
+  width: 80%; /* Ancho deseado */
+  margin: 2rem; /* Centra horizontalmente */
+}

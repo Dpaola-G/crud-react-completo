@@ -4,10 +4,17 @@ import './ModalAgregar.css';
 
 function Agregar({ onAgregar }) {
   const [nombre, setNombre] = useState('');
+  const [descripcion, setDescripcion] = useState('');
 
   const handleChangeNombre = (event) => {
     setNombre(event.target.value);
   };
+
+  const handleChangeDescripcion = (event) => {
+    setDescripcion(event.target.value);
+  };
+
+
 
   const handleAgregar = () => {
     if (nombre.trim() === '') { // Verifica si el campo está vacío o solo contiene espacios en blanco
@@ -19,6 +26,21 @@ function Agregar({ onAgregar }) {
       return; // Detiene la ejecución si el campo está vacío
     }
 
+
+   
+      if (descripcion.trim() === '') { // Verifica si el campo está vacío o solo contiene espacios en blanco
+        Swal.fire({
+          title: 'campo incompleto',
+          text: 'ingresar descripcion',
+          icon: 'error'
+        });
+        return; // Detiene la ejecución si el campo está vacío
+      }
+  
+
+
+
+
     Swal.fire({
       title: '¿Deseas agregar?',
       icon: 'question',
@@ -27,9 +49,9 @@ function Agregar({ onAgregar }) {
       cancelButtonText: 'Cancelar',
     }).then((result) => {
       if (result.isConfirmed) {
-        onAgregar(nombre);
+        onAgregar(nombre,descripcion);
         setNombre(''); // Limpiamos el campo de texto después de agregar
-      
+        setDescripcion('');
       
         Swal.fire({
           title: 'Agregado correctamente',
@@ -46,6 +68,9 @@ function Agregar({ onAgregar }) {
         <label>
           Nombre:
           <input type="text" value={nombre} onChange={handleChangeNombre} />
+          Descripcion:
+          <input type="text" value={descripcion} onChange={handleChangeDescripcion} />
+
         </label>
         <button onClick={handleAgregar}>Agregar</button>
       </div>

@@ -2,32 +2,44 @@ import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 import './styles.css';
 
-function ModalEditar({ nombre, onClose, onGuardar }) {
+function ModalEditar({ nombre, descripcion, onClose, onGuardar }) {
   const [nuevoNombre, setNuevoNombre] = useState(nombre);
+  const [nuevaDescripcion, setNuevaDescripcion] = useState(descripcion);
 
   const handleChangeNombre = (event) => {
     setNuevoNombre(event.target.value);
   };
 
+  const handleChangeDescripcion = (event) => {
+    setNuevaDescripcion(event.target.value);
+  };
+
   const handleGuardar = () => {
-    Swal.fire({
-      title: '¿Deseas editar el nombre?',
-      icon: 'question',
-      showCancelButton: true,
-      confirmButtonText: 'Aceptar',
-      cancelButtonText: 'Cancelar',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        onGuardar(nuevoNombre);
+    if (!nuevoNombre.trim() || !nuevaDescripcion.trim()) { // Verifica si alguno de los campos está vacío o contiene solo espacios en blanco
+      Swal.fire({
+        title: 'Campos vacíos',
+        text: 'Por favor llena ambos campos antes de guardar.',
+        icon: 'warning',
+      });
+    } else {
+      Swal.fire({
+        title: '¿Deseas realizar cambios?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Aceptar',
+        cancelButtonText: 'Cancelar',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          onGuardar(nuevoNombre, nuevaDescripcion); // Pasamos ambos valores al callback de guardar
 
-
-        Swal.fire({
-          title: 'Producto editado correctamente',
-          icon: 'success',
-        });
-        
-      }
-    });
+          Swal.fire({
+            title: 'Producto editado correctamente',
+            icon: 'success',
+          });
+          onClose(); // Cerramos el modal después de guardar
+        }
+      });
+    }
   };
 
   return (
@@ -44,6 +56,14 @@ function ModalEditar({ nombre, onClose, onGuardar }) {
               type="text"
               value={nuevoNombre}
               onChange={handleChangeNombre}
+            />
+          </label>
+          <label>
+            Descripción:
+            <input
+              type="text"
+              value={nuevaDescripcion}
+              onChange={handleChangeDescripcion}
             />
           </label>
           <button type="button" onClick={handleGuardar}>

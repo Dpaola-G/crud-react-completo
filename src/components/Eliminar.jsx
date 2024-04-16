@@ -26,7 +26,7 @@ function Eliminar({ onEliminar, id }) {
   };
 
   return (
-    <button onClick={handleEliminar}>Eliminar</button>
+    <button className="button1" onClick={handleEliminar}>Eliminar</button>
   );
 }
 

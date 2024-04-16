@@ -4,12 +4,15 @@ import Modal from './components/ModalEditar';
 import Agregar from './components/Agregar';
 import Buscador from './components/Buscador';
 
+
 function App() {
   const [modalVisible, setModalVisible] = useState(false);
   const [datos, setDatos] = useState([
-    { id: 1, nombre: 'Ejemplo 1' },
-    { id: 2, nombre: 'Ejemplo 2' },
-    { id: 3, nombre: 'Ejemplo 3' },
+  
+      { id: 1, nombre: 'Televisor', descripcion: 'Smart TV 55" 4K' },
+      { id: 2, nombre: 'Refrigerador', descripcion: 'No Frost 500L' },
+      { id: 3, nombre: 'Lavadora', descripcion: 'Carga frontal 8kg' },
+    
   ]);
   const [nombreEditado, setNombreEditado] = useState('');
   const [idEditado, setIdEditado] = useState(null);
@@ -26,17 +29,17 @@ function App() {
     setModalVisible(false);
   };
 
-  const handleGuardar = (nuevoNombre) => {
+  const handleGuardar = (nuevoNombre, nuevaDescripcion) => {
     const nuevosDatos = datos.map((item) =>
-      item.id === idEditado ? { ...item, nombre: nuevoNombre } : item
+      item.id === idEditado ? { ...item, nombre: nuevoNombre, descripcion: nuevaDescripcion } : item
     );
     setDatos(nuevosDatos);
     cerrarModal();
   };
 
-  const handleAgregar = (nuevoNombre) => {
+  const handleAgregar = (nuevoNombre, nuevaDescripcion) => {
     const nuevoId = datos.length + 1;
-    const nuevoDato = { id: nuevoId, nombre: nuevoNombre };
+    const nuevoDato = { id: nuevoId, nombre: nuevoNombre, descripcion: nuevaDescripcion };
     setDatos([...datos, nuevoDato]);
     setMostrarFormularioAgregar(false);
   };
